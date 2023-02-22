@@ -86,6 +86,7 @@ static char           write_buffer[USB_FS_BULK_MAX_PACKET_SIZE];
 *******************************************************************************/
 void usb_add_cdc(void);
 void task_emUSB(void* param);
+void task_user(void* param);
 /*******************************************************************************
 * Function Definitions
 *******************************************************************************/
@@ -142,19 +143,7 @@ int main(void)
 	cy_retarget_io_init(CYBSP_DEBUG_UART_TX, CYBSP_DEBUG_UART_RX, CY_RETARGET_IO_BAUDRATE);
 	init_cycfg_peripherals();
 
-	/* PWM using HAL*/
-	//try to setup
-	    cyhal_pwm_t myPWM;
-	    //                   obj,  pin,complementary_pin, alignment,continuous,dead-time, pin inverting
-	    cyhal_pwm_init_adv(&myPWM, CYBSP_USER_LED, NC, CYHAL_PWM_LEFT_ALIGN, true, 0, false, NULL);
-	    // for set duty cycle
-	    cyhal_pwm_set_duty_cycle(&myPWM, 50.f, 1);
-	    // for set the period
-	//    cyhal_pwm_set_period(&myPWM, period_us, pulse_width_us)
 
-	    // start that PWM
-	    cyhal_pwm_start(&myPWM);
-	 /*end of PWM HAL*/
 
 
 	printf("\x1b[2J\x1b[;H");
@@ -162,8 +151,8 @@ int main(void)
 	    printf("****************** "
 	           "emUSB Device: CDC echo application "
 	           "****************** \r\n\n");
-	xTaskCreate(task_emUSB, "emUSB Task", 500U,
-				   NULL, configMAX_PRIORITIES - 6, NULL);
+	xTaskCreate(task_emUSB, "emUSB Task", 500U,NULL, configMAX_PRIORITIES - 6, NULL);
+	xTaskCreate(task_user, "user Task", 500U,NULL, configMAX_PRIORITIES - 5, NULL);
 	vTaskStartScheduler();
     for (;;)
     {
@@ -244,6 +233,11 @@ void task_emUSB(void* param)
     	USBD_Start();
 
     	const char* hl="hello user \r\n";
+    	while ( (USBD_GetState() & USB_STAT_CONFIGURED) != USB_STAT_CONFIGURED)
+		{
+    		vTaskDelay(10);
+
+		}
     /* Repeatedly running part of the task */
 	for(;;)
 	{
@@ -256,4 +250,75 @@ void task_emUSB(void* param)
 	}
 }
 
+bool callback_Stats= false;
+void callbackFunction(void *callback_arg, cyhal_gpio_event_t event)
+{
+	callback_Stats = true;
+}
+void task_user(void* param)
+{
+	uint8_t phase_t = 0;
+	callback_Stats = false;
+
+	// setup pin
+	// user button pin as input pullup
+	cyhal_gpio_init(CYBSP_USER_BTN, CYHAL_GPIO_DIR_INPUT, CYHAL_GPIO_DRIVE_PULLUP, CYBSP_BTN_OFF);
+	// user led pin as output
+//	cyhal_gpio_init(CYBSP_USER_LED, CYHAL_GPIO_DIR_OUTPUT, CYHAL_GPIO_DRIVE_STRONG, CYBSP_LED_STATE_OFF);
+	/* PWM using HAL*/
+	//try to setup
+		cyhal_pwm_t myPWM;
+		//                   obj,  pin,complementary_pin, alignment,continuous,dead-time, pin inverting
+		cyhal_pwm_init_adv(&myPWM, CYBSP_USER_LED, NC, CYHAL_PWM_LEFT_ALIGN, true, 0, false, NULL);
+		// for set duty cycle
+		cyhal_pwm_set_duty_cycle(&myPWM, 50.f, 1);
+		// for set the period
+  //    cyhal_pwm_set_period(&myPWM, period_us, pulse_width_us)
+
+		// start that PWM
+		cyhal_pwm_start(&myPWM);
+	 /*end of PWM HAL*/
+
+
+	/*Interrupt button using HAL*/
+		cyhal_gpio_callback_data_t my_callback_data = {.callback = callbackFunction};
+		cyhal_gpio_register_callback(CYBSP_USER_BTN, &my_callback_data);
+		cyhal_gpio_enable_event(CYBSP_USER_BTN, CYHAL_GPIO_IRQ_FALL, CYHAL_ISR_PRIORITY_DEFAULT, true);
+	/* end of interrupt HAL*/
+	for(;;)
+	{
+		if( callback_Stats )
+		{
+			callback_Stats = false;
+			phase_t ++;
+			if( phase_t > 5)
+				phase_t = 0;
+			switch(phase_t)
+			{
+				case 1:
+						cyhal_pwm_set_duty_cycle(&myPWM, 10.f, 1);
+						break;
+				case 2:
+						cyhal_pwm_set_duty_cycle(&myPWM, 20.f, 1);
+						break;
+				case 3:
+						cyhal_pwm_set_duty_cycle(&myPWM, 30.f, 1);
+						break;
+				case 4:
+						cyhal_pwm_set_duty_cycle(&myPWM, 40.f, 1);
+						break;
+				case 5:
+						cyhal_pwm_set_duty_cycle(&myPWM, 50.f, 1);
+						break;
+				default:
+					cyhal_pwm_set_duty_cycle(&myPWM, 70.f, 1);
+					break;
+			}
+			printf("****************** "
+				           "i'm here "
+				           "****************** \r\n\n");
+		}
+		vTaskDelay(100);
+	}
+}
 /* [] END OF FILE */
