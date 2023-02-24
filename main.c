@@ -142,6 +142,7 @@ int main(void)
 	           "****************** \r\n\n");
 	xTaskCreate(task_emUSB, "emUSB Task", 500U,NULL, configMAX_PRIORITIES - 6, NULL);
 	xTaskCreate(task_user, "user Task", 500U,NULL, configMAX_PRIORITIES - 5, NULL);
+	xTaskCreate(task_sensor, "thermistor Task", 500U,NULL, configMAX_PRIORITIES - 4, NULL);
 	vTaskStartScheduler();
     for (;;)
     {
