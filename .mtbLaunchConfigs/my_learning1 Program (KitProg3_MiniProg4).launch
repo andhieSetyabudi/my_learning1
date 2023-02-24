@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="ilg.gnumcueclipse.debug.gdbjtag.openocd.launchConfigurationType">
     <stringAttribute key="com.cypress.studio.launch.mode" value="run"/>
-    <stringAttribute key="com.cypress.studio.launch.owner.0" value="90698df0-2ecb-48e6-9e5a-7b0f2239a300"/>
+    <stringAttribute key="com.cypress.studio.launch.owner.0" value="523465da-be64-48d7-8f82-aa601608b806"/>
     <booleanAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.doContinue" value="false"/>
     <booleanAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.doDebugInRam" value="false"/>
     <booleanAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.doFirstReset" value="false"/>
@@ -23,8 +23,8 @@
     <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.otherInitCommands" value=""/>
     <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.otherRunCommands" value="quit"/>
     <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.openocd.secondResetType" value="run"/>
-    <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.svdPath" value="${cy_prj_path:90698df0-2ecb-48e6-9e5a-7b0f2239a300}/../mtb_shared/mtb-pdl-cat1/release-v3.2.0/devices/COMPONENT_CAT1A/svd/psoc6_02.svd"/>
-    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="${cy_prj_path:90698df0-2ecb-48e6-9e5a-7b0f2239a300}/build/APP_CY8CPROTO-062-4343W/Debug/mtb-example-empty-app.hex"/>
+    <stringAttribute key="ilg.gnumcueclipse.debug.gdbjtag.svdPath" value="${cy_prj_path:523465da-be64-48d7-8f82-aa601608b806}/../mtb_shared/mtb-pdl-cat1/release-v3.2.0/devices/COMPONENT_CAT1A/svd/psoc6_02.svd"/>
+    <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value="${cy_prj_path:523465da-be64-48d7-8f82-aa601608b806}/build/APP_CY8CPROTO-062-4343W/Debug/mtb-example-empty-app.hex"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value=""/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.ipAddress" value="localhost"/>
     <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.jtagDevice" value="GNU MCU OpenOCD"/>
@@ -47,7 +47,7 @@
     <booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>
     <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
     <stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
-    <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="${cy_prj_path:90698df0-2ecb-48e6-9e5a-7b0f2239a300}/build/APP_CY8CPROTO-062-4343W/Debug/mtb-example-empty-app.hex"/>
+    <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="${cy_prj_path:523465da-be64-48d7-8f82-aa601608b806}/build/APP_CY8CPROTO-062-4343W/Debug/mtb-example-empty-app.hex"/>
     <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="my_learning1"/>
     <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="true"/>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">

@@ -85,7 +85,7 @@ VERBOSE=
 # ... then code in directories named COMPONENT_foo and COMPONENT_bar will be
 # added to the build
 #
-COMPONENTS=USBD_BASE FREERTOS 
+COMPONENTS=USBD_BASE FREERTOS EMWIN_NOSNTS
 
 # Like COMPONENTS, but disable optional code that was enabled by default.
 DISABLE_COMPONENTS=
@@ -148,7 +148,6 @@ POSTBUILD=
 #
 # This controls where automatic source code discovery looks for code.
 CY_APP_PATH=
-
 # Relative path to the shared repo location.
 #
 # All .mtb files have the format, <URI>#<COMMIT>#<LOCATION>. If the <LOCATION> field
