@@ -58,7 +58,8 @@
                 "mtb-hal-cat1": "latest-v2.X",
                 "mtb-pdl-cat1": "latest-v3.X",
                 "recipe-make-cat1a": "latest-v2.X",
-                "retarget-io": "latest-v1.X"
+                "retarget-io": "latest-v1.X",
+                "thermistor": "latest-v2.X"
             },
             "docs_dir": "docs",
             "flow_version": "2.0",
