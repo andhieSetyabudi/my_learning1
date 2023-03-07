@@ -19,7 +19,7 @@
 #include "USB.h"
 #include "USB_CDC.h"
 
-
+#include "cy8ckit_028_epd.h"
 #include <my_sys_task.h>
 #include "mtb_ssd1306.h"
 #include "GUI.h"
